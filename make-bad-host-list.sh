@@ -1,25 +1,33 @@
 #!/bin/bash
 
-# update init ad/bad-hosts
+#
+# init/update ad/bad-hosts
+#
+
 bad_hosts="bad-hosts"
 if [ -d $bad_hosts ]
     then
         cd $bad_hosts
-        echo "Update Ad/Bad Hosts ... "
+        printf "Update Ad/Bad Hosts ... "
         git pull | grep -qi 'master'
         if [ $? -gt 0 ]
             then
-                echo "Nothing to do"
+                printf "\tNothing to do!"
                 exit 0
         fi
         cd ..
     else
-        echo "Init Ad/Bad Hosts ... "
+        printf "Init Ad/Bad Hosts ... "
         git clone https://github.com/StevenBlack/hosts $bad_hosts &> /dev/null
 fi
 
-echo "done"
+printf "\tdone.\n"
 
+#
+# generate bad_host.list file
+#
+
+printf "generate bad_host.list ..."
 # define resulting bad-hosts list file
 list="bad_hosts.list"
 serial=`date '+%Y%m%d%H'`
@@ -44,3 +52,6 @@ EOT
 # convert hosts file to bind syntax
 grep -oP '^\d{1,3}\.0\.0\.\d\s+[^\s]+' bad-hosts/hosts | \
 sed -r "s/^(.*)\s(.*)$/\2\tA\t\1/g" >> $list
+
+printf "\tdone.\n"
+echo "cp bad_host.list file to your bind zone dir."
