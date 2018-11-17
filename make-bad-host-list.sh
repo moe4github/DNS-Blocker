@@ -9,10 +9,12 @@ if [ -d $bad_hosts ]
     then
         cd $bad_hosts
         printf "Update Ad/Bad Hosts ... "
+
+        # exist update from master branch?
         git pull | grep -qi 'master'
         if [ $? -gt 0 ]
             then
-                printf "\tNothing to do!"
+                printf "\tNothing to do!\n"
                 exit 0
         fi
         cd ..
