@@ -1,15 +1,17 @@
 #!/bin/bash
 
-# update main repro via
-#git remote update https://github.com/moe4github/DNS-Blocker
-
 # update init ad/bad-hosts
 bad_hosts="bad-hosts"
 if [ -d $bad_hosts ]
     then
         cd $bad_hosts
         echo "Update Ad/Bad Hosts ... "
-        git remote update https://github.com/StevenBlack/hosts &> /dev/null
+        git pull | grep -qi 'master'
+        if [ $? -gt 0 ]
+            then
+                echo "Nothing to do"
+                exit 0
+        fi
         cd ..
     else
         echo "Init Ad/Bad Hosts ... "
