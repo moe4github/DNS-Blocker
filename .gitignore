@@ -1,2 +1,6 @@
-# ignore https://github.com/StevenBlack/hosts.git repo
-bad-hosts/
+#
+# ignore following directorys and files
+#
+
+bad-hosts/         # ignore https://github.com/StevenBlack/hosts.git repo 
+bad_hosts.list     # generated bind rpz file
