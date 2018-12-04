@@ -21,7 +21,7 @@ if [ -d $bad_hosts ]
             printf "nothing to do!\n"
             exit 0
         elif [ $LOCAL = $BASE ]; then
-            git merge "$UPSTREAM"
+            git merge "$UPSTREAM" &> /dev/null
             printf "done.\n"
         else
             printf "error!\n"
@@ -34,8 +34,6 @@ if [ -d $bad_hosts ]
         printf "Init Ad/Bad Hosts ... "
         git clone https://github.com/StevenBlack/hosts $bad_hosts &> /dev/null
 fi
-
-printf "\tdone.\n"
 
 #
 # generate bad_host.list file
