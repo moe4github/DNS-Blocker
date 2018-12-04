@@ -9,14 +9,26 @@ if [ -d $bad_hosts ]
     then
         cd $bad_hosts
         printf "Update Ad/Bad Hosts ... "
+        git remote update &> /dev/null
 
-        # exist update from master branch?
-        git pull | grep -qi 'master'
-        if [ $? -gt 0 ]
-            then
-                printf "\tNothing to do!\n"
-                exit 0
+        git_status=-1
+        UPSTREAM=${1:-'@{u}'}
+        LOCAL=$(git rev-parse @)
+        REMOTE=$(git rev-parse "$UPSTREAM")
+        BASE=$(git merge-base @ "$UPSTREAM")
+
+        if [ $LOCAL = $REMOTE ]; then
+            printf "nothing to do!\n"
+            exit 0
+        elif [ $LOCAL = $BASE ]; then
+            git merge "$UPSTREAM"
+            printf "done.\n"
+        else
+            printf "error!\n"
+            echo "check git repo!"
+            exit 0
         fi
+
         cd ..
     else
         printf "Init Ad/Bad Hosts ... "
