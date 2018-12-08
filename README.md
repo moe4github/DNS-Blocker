@@ -13,9 +13,8 @@ As you can read at the [bind manual (S.91)](https://www.bind9.net/manuals)
     git clone https://github.com/moe4github/DNS-Blocker.git
 
 ### Config
-Add the rpz as new zone in the bind config file named.conf.local (on debian systems)
+Add the rpz as new zone in the bind config file __named.conf.local__ (on debian systems)
 
-    __[named.conf.local]:__
     zone "rpz" {
         type master;
         file "/etc/bind/<generate rpz filename>";
@@ -26,11 +25,9 @@ Add the rpz as new zone in the bind config file named.conf.local (on debian syst
 
 The option `check-names ignore;` is used because the generated bad-host list include also host names with underscore. Without this option, bind will not load the file.
 
-After that, add the following option into the named.conf.options config file:
+After that, add the following option into the __named.conf.options__ config file:
 
     response-policy { zone "rpz";};
-
-[named.conf.options]
 
 ### Update
     git pull <remote repo>
