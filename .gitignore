@@ -2,4 +2,5 @@
 /*
 # except following files
 !make-bad-host-list.sh
+!tracker.pl
 !README.md
