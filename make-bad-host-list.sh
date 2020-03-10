@@ -116,7 +116,7 @@ echo "; begin trackers" >> $list
 printf "add trackers ..."
 for file in trackers/domains/*.json
 do
-    domain=$(./tracker.pl $file)
+    domain=$(./tracker.pl --filter=maximum --file=$file)
     if ((${#domain} > 0))
     then
         echo "$domain A 0.0.0.0" >> $list
