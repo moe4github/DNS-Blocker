@@ -1,8 +1,9 @@
 # DNS-Blocker
-Using Bind9 for blacklisting (b)ad hosts
+Using Bind9 for blacklisting (b)ad hosts and trackers
 
 ### Motivation
-Prepare a (b)ad host list from [StevenBlack's Project](https://github.com/StevenBlack/hosts) for Linux DNS Server BIND.
+Prepare a (b)ad host list from [StevenBlack's Project](https://github.com/StevenBlack/hosts) for Linux DNS Server BIND. Also add tracking domains from [DuckDuckGo](https://github.com/duckduckgo/tracker-radar) to this black list.
+
 
 #### Bind - Response Policy Zone (RPZ) Rewriting
 As you can read at the [bind manual (S.91)](https://www.bind9.net/manuals)
